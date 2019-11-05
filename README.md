@@ -11,17 +11,5 @@
 
 
 
-### Setup
-#### `.env` requirements
-* `PORT` - Process.env.port || 3000
-* `MONGODB_URI` - URL to the running mongo instance/db
-
-#### Running the app
-* `npm start`
-* Endpoint: `/foo/bar/`
-  * Returns a JSON object with abc in it.
-* Endpoint: `/bing/zing/`
-  * Returns a JSON object with xyz in it.
-
 #### UML
 Link to an image of the UML for your application and response to events
