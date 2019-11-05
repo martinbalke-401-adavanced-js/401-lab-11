@@ -15,7 +15,7 @@ function basicDecode(authString) {
 
   return {
     username: username,
-    password: password
+    password: password,
   }; // return decoded
 }
 
