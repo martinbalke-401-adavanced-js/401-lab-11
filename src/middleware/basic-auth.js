@@ -44,19 +44,14 @@ module.exports = async (req, res, next) => {
   let credentials = basicDecode(encodedData);
 
   // now that we have the credentials, let's authenticate
-  let user = await users.authBasic(credentials)
-    .then( () => {
-      if (user) {
-        req.user = user;
-        next();
-      } else next('User not found'); 
-    });
+  let user = await users.authBasic(credentials);
+
   // We store the authenticated user back into the request for
   // other route endpoints to use if the user is valid. If the
   // user is not valid, we throw the next error middleware in the
   // chain
-  // if (user) {
-  //   req.user = user
-  //   next();
-  // } else next('User not found');
+  if (user) {
+    req.user = user
+    next();
+  } else next('User not found');
 };
