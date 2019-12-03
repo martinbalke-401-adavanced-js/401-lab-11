@@ -5,9 +5,16 @@ const express = require('express');
 const googleMW = require('../../middleware/oauth/google-mw.js');
 const router = express.Router();
 
-// TODO: Swagger Comment
+/**
+ * Get route for the google path. Allows user to log in to their Google account through Google Oauth
+ * @route GET /google
+ * @param {Object} res - The response from the server sent back to the client
+ * @returns {Object} 200 - The fully fleshed out URL for Google Oauth requests 
+ */
 router.get('/google', (req, res, next) => {
+  //Declaring the start of the Oauth URL
   let googleOAuthURL = process.env.GOOGLE_AUTH_SERVICE;
+  //Setting the options necessary for Google to parse Oauth requests
   let options = {
     client_id: process.env.GOOGLE_CLIENT_ID,
     redirect_uri: process.env.HOME_URL + '/google-oauth',
@@ -16,16 +23,16 @@ router.get('/google', (req, res, next) => {
     response_type: 'code',
   };
 
-  // TODO: Comment
+  //Setting up our URL to use query paramaters
   googleOAuthURL += '?';
 
-  // TODO: Comment
+  //Iterating through our options object and adding each key value pair to the URL as a parameter
   Object.keys(options).forEach((key, indx) => {
     googleOAuthURL += key + '=' + encodeURIComponent(options[key]);
     googleOAuthURL += '&';
   });
 
-  // TODO: Comment
+  //Sending back the fully set up Google URL which redirects us to the Google sign in page
   res.status(200).json({ url: googleOAuthURL });
 });
 
