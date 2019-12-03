@@ -36,19 +36,17 @@ router.get('/google', (req, res, next) => {
   res.status(200).json({ url: googleOAuthURL });
 });
 
-// TODO: Swagger Comment
+/**
+ * @route GET /google-oauth
+ * @returns {Object} 200 - The response from google containing information about the user
+ */
 router.get('/google-oauth', async (req, res, next) => {
   let data = await googleMW(req);
 
-  // TODO: Comment
+  // Sending back the response to our server which will include the email and name of the authenticated user
   res.status(200).json({ name: data.name, email: data.email });
 
-  // TODO: README Question:
-  // Now that we have some data about the user, how would we go about
-  // adding this user to our database?
-  // What data should we save?
-  // What data is missing?
-  // What considerations about storing this data do we need to take?
+  
 });
 
 module.exports = router;
